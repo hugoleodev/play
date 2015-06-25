@@ -10,3 +10,7 @@ class HomepageTest(TestCase):
     def test_get(self):
         'GET / must return status code 200'
         self.assertEqual(200, self.resp.status_code)
+
+    def test_template(self):
+        'Homepage must use template core/index.html'
+        self.assertTemplateUsed(self.resp, "core/index.html")
