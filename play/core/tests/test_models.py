@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.core.files import File
 from django.conf import settings
+from datetime import datetime
 from unipath import Path
 from play.core.models import Filme
 
@@ -30,6 +31,11 @@ class FilmeTest(TestCase):
         file_path = self.obj.capa.path
 
         self.failUnless(open(file_path), 'Capa image was not found')
+
+    def test_has_created_at(self):
+        'Filme must have automatic created_at'
+        self.obj.save()
+        self.assertIsInstance(self.obj.created_at, datetime)
 
     def tearDown(self):
         filmes = Filme.objects.all()
