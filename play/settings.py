@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -66,7 +67,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'America/Sao_Paulo'
 
@@ -84,3 +85,6 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = PROJECT_DIR.child('media')
 MEDIA_URL = '/media/'
+
+DJANGORESIZED_DEFAULT_SIZE = [168, 216]
+
