@@ -12,5 +12,5 @@ class HomepageTest(TestCase):
         self.assertEqual(200, self.resp.status_code)
 
     def test_template(self):
-        'Homepage must use template core/index.html'
-        self.assertTemplateUsed(self.resp, "core/index.html")
+        'Homepage must use template core/filme_list.html'
+        self.assertTemplateUsed(self.resp, "core/filme_list.html")

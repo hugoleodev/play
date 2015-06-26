@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from play.core.models import Filme
+from django.views.generic import ListView
 
 
-def home(request):
-    return render(request, 'core/index.html')
+class FilmeList(ListView):
+    model = Filme
