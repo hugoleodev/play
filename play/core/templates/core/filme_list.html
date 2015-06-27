@@ -13,18 +13,6 @@
 </header>
 
 <section id="listagem" class='fix'>
-	<ul>
-		<li class="fl"><a href="interna.html"><img src="{{ STATIC_URL }}img/cartaz1.jpg" alt=""></a></li>
-		<li class="fl"><a href="interna.html"><img src="{{ STATIC_URL }}img/cartaz2.jpg" alt=""></a></li>
-		<li class="fl"><a href="interna.html"><img src="{{ STATIC_URL }}img/cartaz3.jpg" alt=""></a></li>
-		<li class="fl"><a href="interna.html"><img src="{{ STATIC_URL }}img/cartaz4.jpg" alt=""></a></li>
-		<li class="fl last"><a href="interna.html"><img src="{{ STATIC_URL }}img/cartaz5.jpg" alt=""></a></li>
-		<li class="fl"><a href="interna.html"><img src="{{ STATIC_URL }}img/cartaz6.jpg" alt=""></a></li>
-		<li class="fl"><a href="interna.html"><img src="{{ STATIC_URL }}img/cartaz7.jpg" alt=""></a></li>
-		<li class="fl"><a href="interna.html"><img src="{{ STATIC_URL }}img/cartaz8.jpg" alt=""></a></li>
-		<li class="fl"><a href="interna.html"><img src="{{ STATIC_URL }}img/cartaz9.jpg" alt=""></a></li>
-		<li class="fl last"><a href="interna.html"><img src="{{ STATIC_URL }}img/cartaz10.jpg" alt=""></a></li>
-		<li class="fl"><a href="interna.html"><img src="{{ STATIC_URL }}img/cartaz11.jpg" alt=""></a></li>
-	</ul>
+	{% include 'core/filme_list_snippet.html' with filmes=object_list %}
 </section>
 {% endblock content %}

@@ -1,0 +1,11 @@
+<ul>
+    {% for filme in filmes %}
+        <li class="fl">
+            <a href="#">
+                <img src="{{ MEDIA_URL }}{{ filme.capa }}" alt="">
+            </a>
+        </li>
+    {% empty %}
+        <h1>Não existe filmes cadastrados</h1>
+    {% endfor %}
+</ul>
