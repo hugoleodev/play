@@ -41,3 +41,8 @@ class FilmeDetailTest(TestCase):
         'Context must have a Filme instance'
         filme = self.resp.context['filme']
         self.assertIsInstance(filme, Filme)
+
+    def test_html(self):
+        'HTML must contain data'
+        self.assertContains(self.resp, 'As Bem Armadas')
+        self.assertContains(self.resp, 'A agente especial do FBI Sarah Ashburn')
