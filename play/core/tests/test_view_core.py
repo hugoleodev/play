@@ -36,3 +36,8 @@ class FilmeDetailTest(TestCase):
     def test_template(self):
         'FilmeDetail must use template core/filme_detail.html'
         self.assertTemplateUsed(self.resp, "core/filme_detail.html")
+
+    def test_context_with_filme(self):
+        'Context must have a Filme instance'
+        filme = self.resp.context['filme']
+        self.assertIsInstance(filme, Filme)
