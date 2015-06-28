@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<main id="Content" class="fix">
+    <header class="fix">
+        <h1>{{ filme.nome }}</h1>
+    </header>
+    
+    <section id="Infos" class='fix'>
+        <figure class="fl"><img src="{{ MEDIA_URL }}{{ filme.capa }}" alt=""></figure>
+
+        <article class="fl">
+            <p class="tit">Sinopse:</p>
+            <p class="txt">{{ filme.sinopse }}</p>
+            <p class="tit">Genero:</p>
+            <p class="txt"><a href="genero.html">Comédia</a> e <a href="genero.html">Ação</a>.</p>
+
+            <p class="tit">Atores:</p>
+            <p class="txt"><a href="artista.html">Marlon Wayans</a>, <a href="artista.html">Melissa McCarthy</a> e <a href="artista.html">Sandra Bullock</a>.</p>
+        </article>
+
+    </section>
+
+    <section id="listagem" class='fix'>
+        <header class="fix">
+            <h2>Filmes Relacionados</h2>
+        </header>
+        {% include 'core/filme_list_snippet.html' %}
+    </section>
+
+</main>
+{% endblock content %}
