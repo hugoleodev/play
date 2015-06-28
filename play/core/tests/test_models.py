@@ -1,23 +1,17 @@
 from django.test import TestCase
-from django.core.files import File
-from django.conf import settings
+from django.template.defaultfilters import slugify
+from django.db import IntegrityError
 from datetime import datetime
-from unipath import Path
 from play.core.models import Filme
+from model_mommy import mommy
 
 
 class FilmeTest(TestCase):
-    def setUp(self):
-        self.file_stub = settings.PROJECT_DIR.child('core',
-                                                    'tests',
-                                                    'stubs',
-                                                    'cartaz1.jpg')
 
-        self.obj = Filme(
-            nome="As Bem Armadas",
-            sinopse="A agente especial do FBI Sarah Ashburn",
-            capa=File(open(self.file_stub))
-        )
+    def setUp(self):
+        self.obj = mommy.make(Filme,
+                              nome="As Bem Armadas",
+                              sinopse="A agente especial do FBI Sarah Ashburn")
 
     def test_create(self):
         'Filme must have name and sinopse'
@@ -37,6 +31,16 @@ class FilmeTest(TestCase):
         self.obj.save()
         self.assertIsInstance(self.obj.created_at, datetime)
 
-    def tearDown(self):
-        filmes = Filme.objects.all()
-        map(lambda filme: Path(filme.capa.path).remove(), filmes)
+    def test_has_slug_field(self):
+        'Filme must have a slug field based on nome field'
+        self.obj.save()
+        self.assertEqual(self.obj.slug, slugify(self.obj.nome))
+
+    def test_nome_unique(self):
+        'Filme must have a unique nome field'
+        self.obj.save()
+
+        with self.assertRaises(IntegrityError):
+            mommy.make(Filme,
+                       nome="As Bem Armadas",
+                       sinopse="A agente especial do FBI Sarah Ashburn")
