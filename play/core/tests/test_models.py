@@ -1,8 +1,10 @@
+# -*- coding:utf-8 -*-
+
 from django.test import TestCase
 from django.template.defaultfilters import slugify
 from django.db import IntegrityError
 from datetime import datetime
-from play.core.models import Filme
+from play.core.models import Filme, Genero
 from model_mommy import mommy
 
 
@@ -44,3 +46,19 @@ class FilmeTest(TestCase):
             mommy.make(Filme,
                        nome="As Bem Armadas",
                        sinopse="A agente especial do FBI Sarah Ashburn")
+
+
+class GeneroTest(TestCase):
+
+    def setUp(self):
+        self.filme = mommy.make(Filme,
+                                nome="As Bem Armadas",
+                                sinopse="A agente especial do FBI Sarah Ashburn")
+
+    def test_create(self):
+        genero = mommy.make(Genero, nome="Comédia", filme=self.filme)
+        self.assertEqual(1, self.genero.pk)
+
+    def test_unicode(self):
+        genero = mommy.make(Genero, nome="Comédia", filme=self.filme)
+        self.assertEqual(u'Comédia', unicode(genero))

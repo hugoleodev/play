@@ -22,3 +22,11 @@ class Filme(models.Model):
         self.slug = slugify(self.nome)
 
         super(Filme, self).save(*args, **kwargs)
+
+
+class Genero(models.Model):
+    nome = models.CharField(max_length=20)
+    filme = models.ForeignKey('Filme')
+
+    def __unicode__(self):
+        return self.nome

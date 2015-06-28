@@ -1,5 +1,5 @@
 from django.contrib import admin
-from play.core.models import Filme
+from play.core.models import Filme, Genero
 
 
 class FilmeAdmin(admin.ModelAdmin):
@@ -7,3 +7,4 @@ class FilmeAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
 
 admin.site.register(Filme, FilmeAdmin)
+admin.site.register(Genero)
