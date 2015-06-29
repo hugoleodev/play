@@ -28,7 +28,7 @@ class Filme(models.Model):
 
 
 class Genero(models.Model):
-    nome = models.CharField(max_length=20)
+    nome = models.CharField(max_length=20, unique=True)
     filme = models.ForeignKey('Filme')
 
     def __unicode__(self):

@@ -68,3 +68,10 @@ class GeneroTest(TestCase):
         genero = mommy.make(Genero, nome="Comédia", filme=self.filme)
         # abc = unicode('Comédia')
         self.assertEqual('Comédia', genero.__unicode__())
+
+    def test_nome_unique(self):
+        'Genero must have a unique nome field'
+        mommy.make(Genero, nome="Comédia", filme=self.filme)
+
+        with self.assertRaises(IntegrityError):
+            mommy.make(Genero, nome="Comédia", filme=self.filme)
