@@ -38,6 +38,11 @@ class FilmeTest(TestCase):
         self.obj.save()
         self.assertEqual(self.obj.slug, slugify(self.obj.nome))
 
+    def test_unicode(self):
+        'Filme representation should be the nome field'
+        self.obj.save()
+        self.assertEqual('As Bem Armadas', self.obj.__unicode__())
+
     def test_nome_unique(self):
         'Filme must have a unique nome field'
         self.obj.save()

@@ -18,6 +18,9 @@ class Filme(models.Model):
     image_tag.short_description = 'Capa'
     image_tag.allow_tags = True
 
+    def __unicode__(self):
+        return self.nome
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nome)
 
