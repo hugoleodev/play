@@ -55,29 +55,24 @@ class FilmeTest(TestCase):
 
 class GeneroTest(TestCase):
 
-    def setUp(self):
-        self.filme = mommy.make(Filme,
-                                nome="As Bem Armadas",
-                                sinopse="A agente especial do FBI Sarah Ashburn")
-
     def test_create(self):
-        genero = mommy.make(Genero, nome="Comédia", filme=self.filme)
+        genero = mommy.make(Genero, nome="Comédia")
         self.assertEqual(1, genero.pk)
 
     def test_unicode(self):
-        genero = mommy.make(Genero, nome="Comédia", filme=self.filme)
+        genero = mommy.make(Genero, nome="Comédia")
         self.assertEqual('Comédia', genero.__unicode__())
 
     def test_nome_unique(self):
         'Genero must have a unique nome field'
-        mommy.make(Genero, nome="Comédia", filme=self.filme)
+        mommy.make(Genero, nome="Comédia")
 
         with self.assertRaises(IntegrityError):
-            mommy.make(Genero, nome="Comédia", filme=self.filme)
+            mommy.make(Genero, nome="Comédia")
 
     def test_has_slug_field(self):
         'Genero must have a slug field based on nome field'
-        genero = mommy.make(Genero, nome="Comédia", filme=self.filme)
+        genero = mommy.make(Genero, nome="Comédia")
         self.assertEqual(genero.slug, slugify(genero.nome))
 
 
@@ -91,16 +86,14 @@ class AtorTest(TestCase):
     def test_create(self):
         ator = mommy.make(Ator,
                           nome="Scarlett Johansson",
-                          pais="Brasil",
-                          filme=self.filme)
+                          pais="Brasil")
 
         self.assertEqual(1, ator.pk)
 
     def test_unicode(self):
         ator = mommy.make(Ator,
                           nome="Scarlett Johansson",
-                          pais="Brasil",
-                          filme=self.filme)
+                          pais="Brasil")
 
         self.assertEqual('Scarlett Johansson', ator.__unicode__())
 
@@ -108,11 +101,9 @@ class AtorTest(TestCase):
         'Genero must have a unique nome field'
         mommy.make(Ator,
                    nome="Scarlett Johansson",
-                   pais="Brasil",
-                   filme=self.filme)
+                   pais="Brasil")
 
         with self.assertRaises(IntegrityError):
             mommy.make(Ator,
                        nome="Scarlett Johansson",
-                       pais="Brasil",
-                       filme=self.filme)
+                       pais="Brasil")

@@ -127,6 +127,11 @@ body{
 	height: 216px;
 	margin: 0 25px 20px 0;
 }
+
+#listagem li a img {
+    width: 168px;
+    height: 216px;
+}
 /*#listagem li.last {
 	margin-right: 0px;
 }*/

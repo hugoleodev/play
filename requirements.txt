@@ -4,3 +4,13 @@ Unipath==1.1
 django-grappelli==2.6.5
 django-resized==0.3.5
 model-mommy==1.2.4
+
+SELECT nome, count(distinct fa.Atores_id) count_ator, count(distinct fg.Generos_id) count_generos
+FROM Filmes f, Filmes_has_Generos fg, Filmes_has_Atores fa
+where fa.Filmes_id = f.id
+and fg.Filmes_id = f.id
+and fa.Atores_id in (1,2)
+and fg.Generos_id in (1,2)
+and f.id != 1
+group by f.id
+order by count_ator desc, count_generos desc

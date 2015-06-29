@@ -16,6 +16,11 @@
     <main id="Content" class="fix">
         {% block content %} {% endblock content %}
     </main>
-    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+        $("#sort_form select").on("change", function () {
+            $("#sort_form").submit();
+        })
+    </script>
 </body>
 </html>

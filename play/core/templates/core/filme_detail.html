@@ -14,14 +14,14 @@
             <p class="txt">{{ filme.sinopse }}</p>
             <p class="tit">Genero:</p>
             <p class="txt">
-            {% for genero in filme.genero_set.all %}
+            {% for genero in filme.generos.all %}
                 <a href="/generos/{{ genero.slug }}/">{{ genero.nome }}</a>, 
             {% endfor %}
 
             </p>
             <p class="tit">Atores:</p>
             <p class="txt">
-            {% for ator in filme.ator_set.all %}
+            {% for ator in filme.atores.all %}
                 <a href="/atores/{{ ator.slug }}/">{{ ator.nome }}</a>, 
             {% endfor %}
             </p>
@@ -33,7 +33,7 @@
         <header class="fix">
             <h2>Filmes Relacionados</h2>
         </header>
-        {% include 'core/filme_list_snippet.html' %}
+        {% include 'core/filme_list_snippet.html' with filmes=filmes_relacionados %}
     </section>
 
 </main>

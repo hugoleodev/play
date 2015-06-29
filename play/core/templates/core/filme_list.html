@@ -3,13 +3,7 @@
 {% block content %}
 <header class="fix">
 	<h1 class="fl">Listagem de filmes</h1>
-	<form action="">
-		<select name="" id="" class="fr">
-			<option value="">Ordenar por:</option>
-			<option value="">a - z</option>
-			<option value="">z - a</option>
-		</select>
-	</form>
+	{% include 'core/form_sort_snippet.html' %}
 </header>
 
 <section id="listagem" class='fix'>

@@ -27,12 +27,14 @@ class FilmeDetailTest(TestCase):
                            nome="As Bem Armadas",
                            sinopse="A agente especial do FBI Sarah Ashburn")
 
-        mommy.make(Genero, nome="Comédia", filme=filme)
+        genero = mommy.make(Genero, nome="Comédia")
 
-        mommy.make(Ator,
-                   nome="Scarlett Johansson",
-                   pais="Estados Unidos",
-                   filme=filme)
+        ator = mommy.make(Ator,
+                          nome="Scarlett Johansson",
+                          pais="Estados Unidos")
+
+        filme.generos.add(genero)
+        filme.atores.add(ator)
 
         self.resp = self.client.get(r('core:film-detail',
                                     kwargs={'slug': 'as-bem-armadas'}))

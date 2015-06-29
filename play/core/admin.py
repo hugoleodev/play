@@ -23,7 +23,7 @@ class AtorAdmin(admin.ModelAdmin):
 
 
 class FilmeAdmin(admin.ModelAdmin):
-    inlines = [GeneroInline, AtorInline]
+    # inlines = [GeneroInline, AtorInline]
     list_display = ('nome', 'sinopse', 'image_tag', 'created_at')
     prepopulated_fields = {'slug': ('nome',)}
 

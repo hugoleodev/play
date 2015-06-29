@@ -7,19 +7,19 @@
 	</header>
 	
 	<section id="Infos" class='fix'>
-		<figure class="fl"><img src="{{ STATIC_URL }}img/artista1.jpg" alt=""></figure>
+		<figure class="fl"><img src="{{ MEDIA_URL }}{{ ator.foto }}" alt=""></figure>
 
 		<article class="fl">
 			<p class="tit">Ator</p>
-			<h2>Scarlett Johansson</h2>
-			<p class="txt"><strong>País:</strong> Brasil</p>
+			<h2>{{ ator.nome }}</h2>
+			<p class="txt"><strong>País:</strong> {{ ator.pais }}</p>
 			
 		</article>
 
 	</section>
 
 	<section id="listagem" class='fix'>
-		{% include 'core/filme_list_snippet.html' %}
+		{% include 'core/filme_list_snippet.html' with filmes=ator.filme_set.all %}
 	</section>
 
 </main>
