@@ -57,8 +57,9 @@ class GeneroTest(TestCase):
 
     def test_create(self):
         genero = mommy.make(Genero, nome="Comédia", filme=self.filme)
-        self.assertEqual(1, self.genero.pk)
+        self.assertEqual(1, genero.pk)
 
     def test_unicode(self):
         genero = mommy.make(Genero, nome="Comédia", filme=self.filme)
-        self.assertEqual(u'Comédia', unicode(genero))
+        # abc = unicode('Comédia')
+        self.assertEqual('Comédia', genero.__unicode__())
