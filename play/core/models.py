@@ -33,3 +33,12 @@ class Genero(models.Model):
 
     def __unicode__(self):
         return self.nome
+
+
+class Ator(models.Model):
+    nome = models.CharField(max_length=20, unique=True)
+    pais = models.CharField(max_length=20)
+    filme = models.ForeignKey('Filme')
+
+    def __unicode__(self):
+        return self.nome

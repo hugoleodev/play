@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.template.defaultfilters import slugify
 from django.db import IntegrityError
 from datetime import datetime
-from play.core.models import Filme, Genero
+from play.core.models import Filme, Genero, Ator
 from model_mommy import mommy
 
 
@@ -66,7 +66,6 @@ class GeneroTest(TestCase):
 
     def test_unicode(self):
         genero = mommy.make(Genero, nome="Comédia", filme=self.filme)
-        # abc = unicode('Comédia')
         self.assertEqual('Comédia', genero.__unicode__())
 
     def test_nome_unique(self):
@@ -75,3 +74,40 @@ class GeneroTest(TestCase):
 
         with self.assertRaises(IntegrityError):
             mommy.make(Genero, nome="Comédia", filme=self.filme)
+
+
+class AtorTest(TestCase):
+
+    def setUp(self):
+        self.filme = mommy.make(Filme,
+                                nome="As Bem Armadas",
+                                sinopse="A agente especial do FBI Sarah Ashburn")
+
+    def test_create(self):
+        ator = mommy.make(Ator,
+                          nome="Scarlett Johansson",
+                          pais="Brasil",
+                          filme=self.filme)
+
+        self.assertEqual(1, ator.pk)
+
+    def test_unicode(self):
+        ator = mommy.make(Ator,
+                          nome="Scarlett Johansson",
+                          pais="Brasil",
+                          filme=self.filme)
+
+        self.assertEqual('Scarlett Johansson', ator.__unicode__())
+
+    def test_nome_unique(self):
+        'Genero must have a unique nome field'
+        mommy.make(Ator,
+                   nome="Scarlett Johansson",
+                   pais="Brasil",
+                   filme=self.filme)
+
+        with self.assertRaises(IntegrityError):
+            mommy.make(Ator,
+                       nome="Scarlett Johansson",
+                       pais="Brasil",
+                       filme=self.filme)
