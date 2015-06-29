@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('nome', models.CharField(unique=True, max_length=20)),
-                ('pais', models.CharField(unique=True, max_length=20)),
+                ('pais', models.CharField(max_length=20)),
                 ('filme', models.ForeignKey(to='core.Filme')),
             ],
             options={

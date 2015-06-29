@@ -1,10 +1,26 @@
 from django.contrib import admin
-from play.core.models import Filme, Genero
+from play.core.models import Filme, Genero, Ator
+
+
+class GeneroInline(admin.TabularInline):
+    model = Genero
+    extra = 1
+
+
+class GeneroAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('nome',)}
+
+
+class AtorInline(admin.TabularInline):
+    model = Ator
+    extra = 1
 
 
 class FilmeAdmin(admin.ModelAdmin):
+    inlines = [GeneroInline, AtorInline]
     list_display = ('nome', 'sinopse', 'image_tag', 'created_at')
     prepopulated_fields = {'slug': ('nome',)}
 
 admin.site.register(Filme, FilmeAdmin)
-admin.site.register(Genero)
+admin.site.register(Genero, GeneroAdmin)
+admin.site.register(Ator)

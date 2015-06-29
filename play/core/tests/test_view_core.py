@@ -1,7 +1,9 @@
+# coding: utf-8
+
 from django.test import TestCase
 from django.core.urlresolvers import reverse as r
 from model_mommy import mommy
-from play.core.models import Filme
+from play.core.models import Filme, Genero
 
 
 class HomepageTest(TestCase):
@@ -46,3 +48,30 @@ class FilmeDetailTest(TestCase):
         'HTML must contain data'
         self.assertContains(self.resp, 'As Bem Armadas')
         self.assertContains(self.resp, 'A agente especial do FBI Sarah Ashburn')
+
+
+class GeneroDetailTest(TestCase):
+
+    def setUp(self):
+        genero = mommy.make(Genero, nome="Comédia")
+        genero.save()
+
+        self.resp = self.client.get(r('core:genero-detail',
+                                    kwargs={'slug': 'comedia'}))
+
+    def test_get(self):
+        'GET should result in 200'
+        self.assertEqual(200, self.resp.status_code)
+
+    def test_template(self):
+        'GeneroDetail must use template core/genero_detail.html'
+        self.assertTemplateUsed(self.resp, "core/genero_detail.html")
+
+    def test_context_with_filme(self):
+        'Context must have a Genero instance'
+        genero = self.resp.context['genero']
+        self.assertIsInstance(genero, Genero)
+
+    def test_html(self):
+        'HTML must contain data'
+        self.assertContains(self.resp, 'Comédia')

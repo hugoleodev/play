@@ -30,9 +30,15 @@ class Filme(models.Model):
 class Genero(models.Model):
     nome = models.CharField(max_length=20, unique=True)
     filme = models.ForeignKey('Filme')
+    slug = models.SlugField()
 
     def __unicode__(self):
         return self.nome
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.nome)
+
+        super(Genero, self).save(*args, **kwargs)
 
 
 class Ator(models.Model):

@@ -13,10 +13,18 @@
             <p class="tit">Sinopse:</p>
             <p class="txt">{{ filme.sinopse }}</p>
             <p class="tit">Genero:</p>
-            <p class="txt"><a href="genero.html">Comédia</a> e <a href="genero.html">Ação</a>.</p>
+            <p class="txt">
+            {% for genero in filme.genero_set.all %}
+                <a href="">{{ genero.nome }}</a>, 
+            {% endfor %}
 
+            </p>
             <p class="tit">Atores:</p>
-            <p class="txt"><a href="artista.html">Marlon Wayans</a>, <a href="artista.html">Melissa McCarthy</a> e <a href="artista.html">Sandra Bullock</a>.</p>
+            <p class="txt">
+            {% for ator in filme.ator_set.all %}
+                <a href="">{{ ator.nome }}</a>, 
+            {% endfor %}
+            </p>
         </article>
 
     </section>

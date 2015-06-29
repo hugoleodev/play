@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<main id="Content" class="fix">
+	<header class="fix">
+		<h1 class="fl">{{ genero.nome }}</h1>
+		<form action="">
+			<select name="" id="" class="fr">
+				<option value="">Ordenar por:</option>
+				<option value="">a - z</option>
+				<option value="">z - a</option>
+			</select>
+		</form>
+	</header>
+
+	<section id="listagem" class='fix'>
+		{% include 'core/filme_list_snippet.html' %}
+	</section>
+
+</main>
+{% endblock content %}

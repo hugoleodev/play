@@ -75,6 +75,11 @@ class GeneroTest(TestCase):
         with self.assertRaises(IntegrityError):
             mommy.make(Genero, nome="Comédia", filme=self.filme)
 
+    def test_has_slug_field(self):
+        'Genero must have a slug field based on nome field'
+        genero = mommy.make(Genero, nome="Comédia", filme=self.filme)
+        self.assertEqual(genero.slug, slugify(genero.nome))
+
 
 class AtorTest(TestCase):
 
