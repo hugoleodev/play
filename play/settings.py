@@ -88,8 +88,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = PROJECT_DIR.child('media')
 MEDIA_URL = '/media/'
 
-DJANGORESIZED_DEFAULT_SIZE = [168, 216]
+DJANGORESIZED_DEFAULT_SIZE = [400, 300]
 
 MOMMY_CUSTOM_FIELDS_GEN = {
-    'django_resized.ResizedImageField': gen_image_field,
+    'django_resized.ResizedImageField': gen_image_field ,
 }

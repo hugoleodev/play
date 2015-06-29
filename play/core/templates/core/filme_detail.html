@@ -15,14 +15,14 @@
             <p class="tit">Genero:</p>
             <p class="txt">
             {% for genero in filme.genero_set.all %}
-                <a href="">{{ genero.nome }}</a>, 
+                <a href="/generos/{{ genero.slug }}/">{{ genero.nome }}</a>, 
             {% endfor %}
 
             </p>
             <p class="tit">Atores:</p>
             <p class="txt">
             {% for ator in filme.ator_set.all %}
-                <a href="">{{ ator.nome }}</a>, 
+                <a href="/atores/{{ ator.slug }}/">{{ ator.nome }}</a>, 
             {% endfor %}
             </p>
         </article>

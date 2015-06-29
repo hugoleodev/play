@@ -3,7 +3,7 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse as r
 from model_mommy import mommy
-from play.core.models import Filme, Genero
+from play.core.models import Filme, Genero, Ator
 
 
 class HomepageTest(TestCase):
@@ -26,7 +26,13 @@ class FilmeDetailTest(TestCase):
         filme = mommy.make(Filme,
                            nome="As Bem Armadas",
                            sinopse="A agente especial do FBI Sarah Ashburn")
-        filme.save()
+
+        mommy.make(Genero, nome="Comédia", filme=filme)
+
+        mommy.make(Ator,
+                   nome="Scarlett Johansson",
+                   pais="Estados Unidos",
+                   filme=filme)
 
         self.resp = self.client.get(r('core:film-detail',
                                     kwargs={'slug': 'as-bem-armadas'}))
@@ -48,6 +54,8 @@ class FilmeDetailTest(TestCase):
         'HTML must contain data'
         self.assertContains(self.resp, 'As Bem Armadas')
         self.assertContains(self.resp, 'A agente especial do FBI Sarah Ashburn')
+        self.assertContains(self.resp, '/generos/comedia/')
+        self.assertContains(self.resp, '/atores/scarlett-johansson/')
 
 
 class GeneroDetailTest(TestCase):
@@ -75,3 +83,32 @@ class GeneroDetailTest(TestCase):
     def test_html(self):
         'HTML must contain data'
         self.assertContains(self.resp, 'Comédia')
+
+
+class AtorDetailTest(TestCase):
+
+    def setUp(self):
+        ator = mommy.make(Ator,
+                          nome="Scarlett Johansson",
+                          pais="Estados Unidos")
+        ator.save()
+
+        self.resp = self.client.get(r('core:ator-detail',
+                                    kwargs={'slug': 'scarlett-johansson'}))
+
+    def test_get(self):
+        'GET should result in 200'
+        self.assertEqual(200, self.resp.status_code)
+
+    def test_template(self):
+        'AtorDetail must use template core/ator_detail.html'
+        self.assertTemplateUsed(self.resp, "core/ator_detail.html")
+
+    def test_context_with_filme(self):
+        'Context must have a Ator instance'
+        ator = self.resp.context['ator']
+        self.assertIsInstance(ator, Ator)
+
+    def test_html(self):
+        'HTML must contain data'
+        self.assertContains(self.resp, 'Scarlett Johansson')

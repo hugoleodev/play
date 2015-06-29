@@ -7,7 +7,7 @@ from django.template.defaultfilters import slugify
 class Filme(models.Model):
     nome = models.CharField(max_length=100, unique=True)
     sinopse = models.TextField(max_length=11)
-    capa = ResizedImageField(upload_to='filmes/', size=[168, 216])
+    capa = ResizedImageField(upload_to='filmes/', size=[220, 283])
     slug = models.SlugField()
     created_at = models.DateTimeField(auto_now_add=True,
                                       verbose_name="criado em")
@@ -35,6 +35,9 @@ class Genero(models.Model):
     def __unicode__(self):
         return self.nome
 
+    def get_absolute_url(self):
+        return "/generos/%s/" % self.slug
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nome)
 
@@ -44,7 +47,17 @@ class Genero(models.Model):
 class Ator(models.Model):
     nome = models.CharField(max_length=20, unique=True)
     pais = models.CharField(max_length=20)
+    foto = ResizedImageField(upload_to='atores/', size=[160, 100])
+    slug = models.SlugField()
     filme = models.ForeignKey('Filme')
 
     def __unicode__(self):
         return self.nome
+
+    def get_absolute_url(self):
+        return "/atores/%d/" % self.slug
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.nome)
+
+        super(Ator, self).save(*args, **kwargs)

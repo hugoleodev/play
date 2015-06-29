@@ -5,6 +5,7 @@ from play.core.models import Filme, Genero, Ator
 class GeneroInline(admin.TabularInline):
     model = Genero
     extra = 1
+    exclude = ('slug',)
 
 
 class GeneroAdmin(admin.ModelAdmin):
@@ -14,6 +15,11 @@ class GeneroAdmin(admin.ModelAdmin):
 class AtorInline(admin.TabularInline):
     model = Ator
     extra = 1
+    exclude = ('slug',)
+
+
+class AtorAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('nome',)}
 
 
 class FilmeAdmin(admin.ModelAdmin):
@@ -23,4 +29,4 @@ class FilmeAdmin(admin.ModelAdmin):
 
 admin.site.register(Filme, FilmeAdmin)
 admin.site.register(Genero, GeneroAdmin)
-admin.site.register(Ator)
+admin.site.register(Ator, AtorAdmin)
