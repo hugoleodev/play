@@ -1,0 +1,6 @@
+machine:
+  environment:
+      DJANGO_SETTINGS_MODULE: play.settings.production
+test:
+  override:
+      - python manage.py test

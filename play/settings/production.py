@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 from unipath import Path
-from model_mommy.generators import gen_image_field
 
 PROJECT_DIR = Path(__file__).parent
 
@@ -84,12 +83,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = PROJECT_DIR.child('static')
 
 MEDIA_ROOT = PROJECT_DIR.child('media')
 MEDIA_URL = '/media/'
 
 DJANGORESIZED_DEFAULT_SIZE = [400, 300]
 
-MOMMY_CUSTOM_FIELDS_GEN = {
-    'django_resized.ResizedImageField': gen_image_field ,
-}
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
